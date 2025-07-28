@@ -143,7 +143,7 @@ if __name__ == "__main__":
     t_vis = torch.ones(n_points * n_points, 1) # Visualize at t=1.0
     x_vis = torch.linspace(0, 1, n_points)
     y_vis = torch.linspace(0, 1, n_points)
-    x_grid, y_grid = torch.meshgrid(x_vis, y_vis, indexing='ij')
+    x_grid, y_grid = torch.meshgrid(x_vis, y_vis, indexing='xy')
     
     # Flatten grid and move to device
     t_flat = t_vis.to(device)
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     # Plotting the velocity field using streamplot
     plt.figure(figsize=(8, 8))
     speed = torch.sqrt(u_pred_grid**2 + v_pred_grid**2)
-    plt.streamplot(x_grid.numpy(), y_grid.numpy(), u_pred_grid.numpy(), v_pred_grid.numpy(), color=speed, cmap='viridis', density=1.5)
+    plt.streamplot(x_grid.numpy(), y_grid.numpy(), u_pred_grid.numpy(), v_pred_grid.numpy(), color=speed.numpy(), cmap='viridis', density=1.5)
     plt.colorbar(label='Velocity Magnitude')
     plt.title('Velocity Field of Lid-Driven Cavity 🌪️')
     plt.xlabel('x')
